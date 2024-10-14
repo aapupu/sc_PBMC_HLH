@@ -1,3 +1,4 @@
+library(Seurat)
 pbmc = CreateSeuratObject(counts,  project = "HLH", min.cells = 10, min.features = 200)
 pbmc <- subset(pbmc, subset = percent.mt < 10)
 pbmc_list <- SplitObject(pbmc,split.by = "orig.ident")
