@@ -116,7 +116,6 @@ Group_GSVA <- function(seurat_obj, Group, category='KEGG',compare = compare) {
               nudge_x =0,nudge_y =0,hjust =Mono_sortdf_sub$hjust,
               size = 3)+
     labs(x = paste0('KEGG'," pathways"),
-         y=paste0("t value of GSVA score\n",'NR_post-NR_pre'),
          title = 'Monocyte')+
     scale_y_continuous(limits=c(-25,25))+
     coord_flip() + 
