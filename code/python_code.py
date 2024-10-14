@@ -8,7 +8,7 @@ import pygam
 import seaborn as sns
 import anndata
 from scipy import io
-# PAGA
+#################### PAGA
 adata = sc.read_h5ad('CD8_counts.h5ad')
 adata.obs.Celltype3 = pd.Categorical(adata.obs.Celltype3, 
                                     categories=['CD8_Tn_CCR7','CD8_Tn_BACH2','CD8_Tcm_RPS10',
@@ -20,7 +20,7 @@ sc.tl.paga(adata, groups='Celltype3')
 with rc_context({'figure.figsize': (4, 4)}):
     sc.pl.paga(adata, color=['Celltype3'], threshold=0.2, show=False, fontsize=14, frameon=True, node_size_scale=0.5, edge_width_scale=0.5,save=True)
 
-# pyscenic
+############### pyscenic
 import loompy as lp
 from pyscenic.rss import regulon_specificity_scores
 from pyscenic.plotting import plot_rss
@@ -83,7 +83,7 @@ regulons = lf.ra.Regulons
 
 rss_cellType = regulon_specificity_scores( auc_mtx, adata.obs['Celltype3'] )
 
-# scirpy
+########################## scirpy
 import scirpy as ir
 import muon as mu
 
