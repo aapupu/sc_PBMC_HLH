@@ -1,6 +1,4 @@
 library(nichenetr)
-
-
 ligand_target_matrix = readRDS("/nichenet/ligand_target_matrix.rds")
 ligand_target_matrix[1:5,1:5]# target genes in rows, ligands in columns
 
