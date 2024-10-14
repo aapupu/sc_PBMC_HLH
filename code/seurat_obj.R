@@ -27,3 +27,11 @@ pbmc.combined <- RunTSNE(pbmc.combined, reduction = "pca", dims = 1:10)
 pbmc.combined <- FindNeighbors(pbmc.combined, reduction = "pca", dims = 1:30)
 pbmc.combined <- FindClusters(pbmc.combined, resolution = 1.35) 
 degs <- FindAllMarkers(pbmc.combined,assay = 'RNA',logfc.threshold = 0.25,min.pct = 0.1,only.pos = T)
+
+#
+pbmc.combined$EBV <- ifelse(test = (colnames(pbmc.combined) %in% colnames(EBV_counts_sub)[colSums(EBV_counts_sub)!=0]),yes = 'Y',no = 'N')
+DimPlot(pbmc.combined,cells.highlight = colnames(pbmc.combined)[pbmc.combined$EBV =='Y'],
+        raster = F,sizes.highlight = 0.1,reduction = 'tsne')+ggtitle('EBV')+
+  NoLegend()+theme(aspect.ratio = 1, plot.title = element_text(hjust = 0.5),
+                   axis.text = element_blank(),
+                   axis.ticks = element_blank())
