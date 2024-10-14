@@ -24,9 +24,6 @@ Myeloid.combined2@active.ident <- as.factor(Myeloid.combined2$Group)
 expressed_genes_receiver = get_expressed_genes('HLH', Myeloid.combined2, pct = 0.10,assay_oi = 'RNA')
 background_expressed_genes = expressed_genes_receiver %>% .[. %in% rownames(ligand_target_matrix)]
 
-# geneset_oi = rownames(subset(cDC_degs[cDC_degs$cluster %in% 'migDC_LAMP3',],p_val_adj<0.05 & avg_log2FC>0.25)) %>% .[. %in% rownames(ligand_target_matrix)]
-
-
 expressed_ligands = ligands
 expressed_receptors = intersect(receptors,expressed_genes_receiver)
 
@@ -38,7 +35,6 @@ ligand_activities = ligand_activities %>% arrange(-aupr_corrected) %>% mutate(ra
 ligand_activities
 
 best_upstream_ligands = ligand_activities %>% top_n(20, aupr_corrected) %>% arrange(-aupr_corrected) %>% pull(test_ligand) %>% unique()
-# best_upstream_ligands <- c(best_upstream_ligands,'IFNG')
 active_ligand_target_links_df = best_upstream_ligands %>% lapply(get_weighted_ligand_target_links,geneset = geneset_oi, ligand_target_matrix = ligand_target_matrix, n = 50) %>% bind_rows() %>% drop_na()
 
 active_ligand_target_links = prepare_ligand_target_visualization(ligand_target_df = active_ligand_target_links_df, ligand_target_matrix = ligand_target_matrix, cutoff = 0.33)
